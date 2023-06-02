@@ -1,0 +1,42 @@
+<div class="px-5 gap-2 weatherCard d-flex flex-column justify-content-between w-20">
+    <div class=" header d-flex justify-content-between">
+        <h4>News</h4>
+        <h6>Monday June, 02</h6>
+    </div>
+    <div class="bodyWeather d-flex flex-column p-3">
+        <div class="position d-flex gap-10">
+            <i class="bi bi-geo-alt-fill"></i>
+            <h4>{{city}}°C</h4>
+        </div>
+        <div class="">
+           
+            <h2>Friday</h2>
+            <h1>{{cityData.hourly.temperature_2m[0]}}</h1>
+            <p class="text-warning"> max {{cityData.daily.apparent_temperature_max[0]}}°C , min {{cityData.daily.apparent_temperature_min[0]}}°C</p>
+            <div class="d-flex ww">
+                <div class="aze">
+                    <i class="bi bi-droplet-fill"></i>
+                    <p>20%</p>
+                </div>
+                <div class="aze">
+                    <i class="bi bi-fan"></i>
+                    <p>26°C</p>
+                </div>
+                <div class="aze">
+                    <i class="bi bi-compass-fill"></i>
+                    <p>west</p>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="bodyWeather footer  d-flex justify-content-between p-3">
+        <div class="d-flex flex-column " *ngFor="let item of cityData.daily.apparent_temperature_max ,let i=index"> 
+            <img class="iconImage" src="../../../assets/image1.png" alt="">
+            
+            <span>{{cityData.daily.time[i]  | date:'shortDate'}}</span>
+            <span>{{item}}°C</span>
+        </div>
+  
+    </div>
+</div>

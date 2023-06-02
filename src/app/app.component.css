@@ -1,0 +1,27 @@
+.containerr{
+    min-height: 100vh;
+    width: 100vw  !important;
+    background-image: url("../assets/sky.jpg");
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.blur{
+    z-index: 1 !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(121, 188, 246, 0.712);
+}
+.container{
+    position: inherit;
+    z-index: 2222222 !important;
+    height: 100vh;
+    color: #fff !important;
+}
+@media (max-width:600px){
+    .select{
+        width: 100% !important;
+        margin: 0 10px !important;
+    }
+}
