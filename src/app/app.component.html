@@ -1,16 +1,19 @@
 <div class="containerr m-0 w-100">
   <div class="blur"></div>
   <div class="container d-flex flex-column justify-content-center align-items-center">
-    <div class="select" style="width: 40%;">
+    <div class="select d-flex gap-3 align-items-center" style="width: 34rem;">
       <select (change)="onGetWeatherData()" [(ngModel)]="cityChosen" class="form-select  my-5" aria-label="Default select example">
-       <option selected>Choose City</option>
+       <option disabled  selected value="">Choose City</option>
        <option *ngFor="let item of citys  | keyvalue" [value]="item.key"  >{{item.key}}</option>
-     </select> 
+     </select>
+     <div *ngIf="cityData">
+      <i class="bi bi-x-lg" (click)="destroyCity()" ></i>
+    </div> 
     </div>
     <div *ngIf="!cityData; else elseBlock">
     </div>
     <ng-template #elseBlock>
-      <app-weather-details style="width:100%" [cityData]="cityData" [city]="cityChosen"></app-weather-details>
+      <app-weather-details class="d-flex align-items-center justify-content-center" style="width:100%" [cityData]="cityData" [city]="cityChosen"></app-weather-details>
       
     </ng-template>
 

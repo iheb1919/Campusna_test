@@ -9,9 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Campusna_test';
-  show :boolean = false
   city=["tunis","alger","egypt","maroc","libye"]
-  cityChosen:any
+  cityChosen:any =""
    citys : any={
     tunis:{latitude :36.82,longitude: 10.17},
     maroc:{latitude :28.50,longitude: -10.00},
@@ -26,8 +25,25 @@ export class AppComponent {
 
    }
    cityData:any
-  constructor(private http:HttpClient){}
+   ngOnInit(){
+    const data = localStorage.getItem('cityData')
+    const city = localStorage.getItem('city')
+    if(data && city) {
+      this.cityData=JSON.parse(data)
+      this.cityChosen=city
+    }
+    
  
+   }
+  constructor(private http:HttpClient){
+   
+  }
+   destroyCity(){
+      localStorage.removeItem('cityData')
+      localStorage.removeItem('city')
+      this.cityData=null
+      this.cityChosen=""
+   }
   getWeatherData(latitude: number, longitude: number): Observable<any> {
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum&timezone=Africa%2FCairo`;
   
@@ -36,13 +52,12 @@ export class AppComponent {
   onGetWeatherData(): void {
     const latitude = this.citys[this.cityChosen].latitude; // Set your desired latitude value
     const longitude = this.citys[this.cityChosen].longitude; 
-    console.log(JSON.stringify(this.cityChosen))
     this.getWeatherData(latitude, longitude).subscribe(
       (response) => {
         // Handle the API response here
         this.cityData=response
-        this.show=true
-        console.log(this.cityData);
+        localStorage.setItem("cityData",JSON.stringify(this.cityData))
+        localStorage.setItem('city',this.cityChosen)
       },
       (error) => {
         // Handle errors, if any

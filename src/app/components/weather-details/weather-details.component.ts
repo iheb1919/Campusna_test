@@ -8,13 +8,11 @@ import { Component,Input } from '@angular/core';
 export class WeatherDetailsComponent {
   @Input() cityData:any
   @Input() city:any
+  myDate=Date.now()
   constructor(){
     
     
 
   }
-  ngOnInit(){
-    console.log("azeazeazeaze")
-    console.log(this.cityData)
-  }
+
 }
